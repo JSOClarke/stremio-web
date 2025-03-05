@@ -8,7 +8,7 @@ const useAnimationFrame = require('stremio/common/useAnimationFrame');
 const useLiveRef = require('stremio/common/useLiveRef');
 const styles = require('./styles');
 
-const Slider = ({ className, value, buffered, minimumValue, maximumValue, disabled, onSlide, onComplete, audioBoost }) => {
+const Slider = ({ className, value, buffered, minimumValue, maximumValue, disabled, onSlide, onComplete }) => {
     const minimumValueRef = useLiveRef(minimumValue !== null && !isNaN(minimumValue) ? minimumValue : 0);
     const maximumValueRef = useLiveRef(maximumValue !== null && !isNaN(maximumValue) ? maximumValue : 100);
     const valueRef = useLiveRef(value !== null && !isNaN(value) ? Math.min(maximumValueRef.current, Math.max(minimumValueRef.current, value)) : 0);
@@ -100,14 +100,14 @@ const Slider = ({ className, value, buffered, minimumValue, maximumValue, disabl
     return (
         <div ref={sliderContainerRef} className={classnames(className, styles['slider-container'], { 'disabled': disabled })} onMouseDown={onMouseDown}>
             <div className={styles['layer']}>
-                <div className={classnames(styles['track'], { [styles['audio-boost']]: audioBoost })} />
+                <div className={styles['track']} />
             </div>
             <div className={styles['layer']}>
                 <div className={styles['track-before']} style={{ width: `calc(100% * ${bufferedPosition})` }} />
             </div>
             <div className={styles['layer']}>
                 <div
-                    className={classnames(styles['track-after'], { [styles['audio-boost']]: audioBoost })}
+                    className={styles['track-after']}
                     style={{ '--mask-width': `calc(${thumbPosition} * 100%)` }}
                 />
             </div>
@@ -127,7 +127,6 @@ Slider.propTypes = {
     disabled: PropTypes.bool,
     onSlide: PropTypes.func,
     onComplete: PropTypes.func,
-    audioBoost: PropTypes.bool
 };
 
 module.exports = Slider;

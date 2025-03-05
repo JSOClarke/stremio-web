@@ -9,7 +9,7 @@ const { useServices } = require('stremio/services');
 const { Slider } = require('stremio/components');
 const styles = require('./styles');
 
-const VolumeSlider = ({ className, volume, onVolumeChangeRequested, muted }) => {
+const VolumeSlider = ({ className, volume, muted, onVolumeChangeRequested }) => {
     const { shell } = useServices();
     const disabled = volume === null || isNaN(volume);
     const routeFocused = useRouteFocused();
@@ -45,7 +45,10 @@ const VolumeSlider = ({ className, volume, onVolumeChangeRequested, muted }) => 
     }, []);
     return (
         <Slider
-            className={classnames(className, styles['volume-slider'], { 'active': slidingVolume !== null })}
+            className={classnames(
+                className, styles['volume-slider'],
+                { 'active': slidingVolume !== null, [styles['audio-boost']]: !!shell.active }
+            )}
             value={
                 !disabled ?
                     !muted ?
@@ -59,7 +62,6 @@ const VolumeSlider = ({ className, volume, onVolumeChangeRequested, muted }) => 
             disabled={disabled}
             onSlide={onSlide}
             onComplete={onComplete}
-            audioBoost={!!shell.active}
         />
     );
 };
@@ -67,8 +69,8 @@ const VolumeSlider = ({ className, volume, onVolumeChangeRequested, muted }) => 
 VolumeSlider.propTypes = {
     className: PropTypes.string,
     volume: PropTypes.number,
-    onVolumeChangeRequested: PropTypes.func,
     muted: PropTypes.bool,
+    onVolumeChangeRequested: PropTypes.func,
 };
 
 module.exports = VolumeSlider;

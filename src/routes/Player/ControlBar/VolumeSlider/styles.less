@@ -7,6 +7,12 @@
     slider-track-after: track-after;
 }
 
+@audio-boost-background: linear-gradient(to right,
+    var(--primary-foreground-color) 0%,
+    var(--primary-foreground-color) 50%,
+    var(--warning-accent-color) 75%,
+    var(--danger-accent-color) 100%) !important;
+
 .volume-slider:not(:global(.disabled)) {
     .slider-track {
         background-color: var(--overlay-color);
@@ -14,6 +20,17 @@
 
     .slider-track-after {
         background-color: var(--primary-foreground-color);
+    }
+
+    &.audio-boost {
+        .slider-track {
+            opacity: 0.3;
+            background: @audio-boost-background;
+        }
+
+        .slider-track-after {
+            background: @audio-boost-background
+        }
     }
 
     &:hover, &:global(.active) {
