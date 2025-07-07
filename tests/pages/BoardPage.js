@@ -33,6 +33,10 @@ export class BoardPage {
         this.categories = page.locator('div[class*="meta-items-container"]');
 
     }
+    async openNavMenu() {
+        await this.navMenuParentButton.click();
+        await this.page.locator('div[class*="nav-menu-container"]').waitFor({ state: 'visible' });
+    }
 
     getPosterInCategory(index) {
         return this.categories.nth(index).locator('a[class*="button-container"]').first();
