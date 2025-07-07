@@ -9,8 +9,8 @@ import { defineConfig } from '@playwright/test';
     fullyParallel: true, // Run tests in parallel
     retries: 0, // Change to 1 or 2 if you're debugging flaky tests
     use: {
-      headless: true, // Set to false if you want to see browser for debugging
-      viewport: { width: 1280, height: 720 },
+      headless: false, // Set to false if you want to see browser for debugging
+      // viewport: { width: 1280, height: 720 },
       actionTimeout: 0,
       ignoreHTTPSErrors: true, // ✅ Allow self-signed HTTPS (e.g., https://localhost)
       screenshot: 'only-on-failure', // Or 'on', 'off'

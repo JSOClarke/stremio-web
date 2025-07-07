@@ -13,8 +13,30 @@ export class BoardPage {
         this.seeAllCategoryButton = page.locator('div').filter({ hasText: /See All$/ }).getByRole('link');
         this.searchBoxPrePress = page.locator('div').filter({ hasText: /^Search or paste link$/ }).nth(1);
         this.searchBoxPostPress = page.getByRole('textbox', { name: 'Search or paste link' });
+        this.fullscreenButton = page.getByTitle('Enter fullscreen mode');
+        this.navMenuParentButton = page.locator('div[class*="nav-menu-popup-label"]');
+        this.navMenuPopup = page.locator('div[class*="nav-menu-container"]');
+        this.navMenuEnterFullscreenMode = page.locator('div[class*="nav-menu-container"]')
+            .getByTitle('Enter fullscreen mode');
+        this.navMenuSettings =page.locator('div[class*="nav-menu-container"]')
+            .getByTitle('Settings');
+        this.navMenuAddons = page.locator('div[class*="nav-menu-container"]')
+            .getByTitle('Addons');
+        this.navMenuPlayUrl = page.locator('div[class*="nav-menu-container"]')
+            .getByTitle('Play URL/Magnet link');
+        this.navMenuHelpFeedback = page.locator('div[class*="nav-menu-container"]')
+            .getByTitle('Help & Feedback');
+        this.navMenuTermsOfService = page.locator('div[class*="nav-menu-container"]')
+            .getByTitle('Terms of Service');
+        this.navMenuPrivacyPolicy = page.locator('div[class*="nav-menu-container"]')
+            .getByTitle('Privacy Policy');
+        this.categories = page.locator('div[class*="meta-items-container"]');
+
     }
 
+    getPosterInCategory(index) {
+        return this.categories.nth(index).locator('a[class*="button-container"]').first();
+    }
     async goTo() {
         await this.page.goto('https://localhost:8080/');
     }
