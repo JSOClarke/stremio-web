@@ -23,6 +23,17 @@ test.describe('Top bar Button', () => {
         await expect(boardPage.navMenuPopup).toBeVisible();
     });
 
+    test('Log-in Sign up buttton navigates or opens up login/setup', async ({ page }) => {
+        const boardPage = new BoardPage(page);
+        await boardPage.openNavMenu();
+        console.log('[NavMenu] Clicking: Login/Signup');
+        await expect(boardPage.navMenuLoginSignup).toBeVisible();
+        await boardPage.navMenuLoginSignup.click();
+        await expect(page).toHaveURL(/intro|login|signup/i);
+        console.log(`[NavMenu] URL after Login/Singup click: ${page.url()}`);
+    });
+
+
     test('Enter Fullscreen button is visible and clickable', async ({ page }) => {
         const boardPage = new BoardPage(page);
         await boardPage.openNavMenu();
@@ -52,15 +63,15 @@ test.describe('Top bar Button', () => {
         console.log(`[NavMenu] Navigated to: ${page.url()}`);
     });
 
-    // test('Play URL button opens or navigates to Play screen', async ({ page }) => {
-    //     const boardPage = new BoardPage(page);
-    //     await boardPage.openNavMenu();
-    //     console.log('[NavMenu] Clicking: Play URL/Magnet link');
+    test('Play URL button opens or navigates to Play screen', async ({ page }) => {
+        const boardPage = new BoardPage(page);
+        await boardPage.openNavMenu();
+        console.log('[NavMenu] Clicking: Play URL/Magnet link');
 
-    //     await boardPage.navMenuPlayUrl.click();
-    //     await expect(page).toHaveURL(/url|magnet/i);
-    //     console.log(`[NavMenu] Navigated to: ${page.url()}`);
-    // });
+        await boardPage.navMenuPlayUrl.click();
+        await expect(page).toHaveURL(/url|magnet/i);
+        console.log(`[NavMenu] Navigated to: ${page.url()}`);
+    });
 
     test('Terms of Service opens ToS page (handles new tab)', async ({ page }) => {
         const boardPage = new BoardPage(page);

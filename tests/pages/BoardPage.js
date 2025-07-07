@@ -31,6 +31,9 @@ export class BoardPage {
         this.navMenuPrivacyPolicy = page.locator('div[class*="nav-menu-container"]')
             .getByTitle('Privacy Policy');
         this.categories = page.locator('div[class*="meta-items-container"]');
+        this.navMenuLoginSignup = page.locator('div[class*="nav-menu-container"]')
+            .getByTitle('Log in / Sign up');
+        this.categories = page.locator('div[class*="meta-items-container"]');
 
     }
     async openNavMenu() {
